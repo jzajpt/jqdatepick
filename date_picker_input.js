@@ -1,42 +1,43 @@
 (function($){
-  
+
   function DatePickerInput(input, options) {
     this.$input = $(input);
     this.calendarContainer = null;
     this.calendarShown = false;
 
     $.extend(this, DatePickerInput.DEFAULT_OPTIONS, options);
-  
+
     this.init();
   }
-  
+
   DatePickerInput.DEFAULT_OPTIONS = {
     dateFormat: '%Y-%m-%d',
     readOnly: true
   };
-  
+
   DatePickerInput.prototype = {
     init: function() {
       var cc = this;
-      
+
       this.calendarContainer = $("<div class='calendar-container' />");
-      
+
       $('body').append(this.calendarContainer)
       this.$input.focus(this, this.inputDidFocus)
                  .change(this, this.inputDidChange);
-                 
+
       if (this.readOnly) {
         this.$input.attr('readonly', 'readonly')
                    .addClass('datepicker-readonly')
                    .click(this, this.inputDidFocus);
       }
-      
+
       this.monthCalendar = this.calendarContainer.hide().monthCalendar({
         selected: function(date) {
-          cc.$input.val(cc.formatDate(date)).change();  
+          cc.$input.val(cc.formatDate(date)).change();
+          cc.hideCalendar();
         }
       })[0];
-      
+
       this.$input.change();
     },
 
@@ -50,17 +51,17 @@
           position: 'absolute',
           top: top, left: left
         });
-      
+
       $([window, document.body]).click(this, this.outsideWasClicked);
       $(document.body).keydown(this, this.keyWasPressed);
     },
-        
+
     hideCalendar: function() {
       this.calendarContainer.hide();
       $([window, document.body]).unbind('click', this.outsideWasClicked);
       $(document.body).unbind('keydown', this.keyWasPressed);
     },
-    
+
     formatDate: function(date) {
       var str = this.dateFormat.replace('%y', date.getYear())
                                .replace('%Y', date.getFullYear())
@@ -68,8 +69,8 @@
                                .replace('%d', date.getDate());
       return str;
     },
-    
-    
+
+
     parseDate: function(stringDate) {
       var options = [ ['%y', '\\d{2}', 'Year'],
                       ['%Y', '\\d{4}', 'FullYear'],
@@ -79,7 +80,7 @@
 
       for (i = 0; i < options.length; i++) {
         var pattern = this.dateFormat.replace(options[i][0], "(" + options[i][1] + ")");
-        
+
         for (j = 0; j < options.length; j++) {
           if (j != i) {
             pattern = pattern.replace(options[j][0], options[j][1]);
@@ -88,7 +89,7 @@
 
         var regexp = new RegExp(pattern);
         var tokens = stringDate.match(regexp);
-        
+
         if (tokens && tokens[1]) {
           var method = "set" + options[i][2];
           if (options[i][2] == 'Month') {
@@ -115,19 +116,19 @@
 
     //
     // Event handlers:
-    
+
     inputDidFocus: function(evt) {
       evt.data.showCalendar();
     },
 
     outsideWasClicked: function(evt) {
       var datePickerInput = evt.data;
-      if (evt.target != datePickerInput.$input[0] && 
+      if (evt.target != datePickerInput.$input[0] &&
           !datePickerInput.wasClickInsideCalendar(evt)) {
         datePickerInput.hideCalendar();
       }
     },
-    
+
     keyWasPressed: function(evt) {
       var datePickerInput = evt.data;
       switch (evt.keyCode)
@@ -150,13 +151,13 @@
       datePickerInput.monthCalendar.select(date);
     }
   };
-  
-  
+
+
   $.fn.datePickerInput = function(options) {
     return this.each(function() {
       return new DatePickerInput(this, options);
     });
   };
-  
+
 })(jQuery);
 
