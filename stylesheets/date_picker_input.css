@@ -1,0 +1,98 @@
+.month-calendar {
+  width: 189px;
+  color: #3F474D;
+  background-color: #FFF;
+}
+
+.month-calendar .title,
+.month-calendar .header,
+.month-calendar .body {
+  float: left;
+}
+
+.month-calendar .title {
+  height: 42px;
+  line-height: 32px;
+}
+
+.month-calendar .title .button {
+  float: left;
+  width: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.month-calendar .title .headline {
+  float: left;
+  width: 149px;
+  text-align: center;
+  font-size: 1.15em;
+}
+
+
+.month-calendar .day {
+  margin: 0 3px 2px 0;
+  padding: 0 3px 0 0;
+  float: left;
+  width: 21px;
+  height: 21px;
+  line-height: 23px;
+  font-size: 90%;
+  text-align: right;
+}
+
+.month-calendar .header .day {
+  font-weight: bold;
+  font-size: 80%;
+}
+
+.month-calendar .body .day {
+  font-size: 90%;
+  text-align: right;
+  cursor: pointer;
+}
+
+.month-calendar .body .day.selected {
+  color: blue;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background-color: #B2B2B2;
+  color: #F6F6F6;
+}
+
+.month-calendar .body .day:hover {
+  background-color: #E7E7E7;
+}
+
+.month-calendar .body .day.inactive {
+  color: white;
+}
+
+.month-calendar .body .day.today {
+  color: #5E96EF;
+}
+
+.month-calendar .body .day.today.selected {
+  color: #FFF;
+  background-color: #5E96EF;
+}
+
+
+
+.calendar-container {
+  padding: 8px;
+  border: 1px solid #bbc;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  box-shadow: rgba(0,0,0,.3) 0 0 8px;
+  -webkit-box-shadow: rgba(0,0,0,.3) 0 0 8px;
+  -moz-box-shadow: rgba(0,0,0,.3) 0 0 8px;
+  background-color: #FFF;
+}
+
+input.datepicker-readonly {
+  cursor: pointer;
+  color: #000;
+}

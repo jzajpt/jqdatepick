@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>untitled</title>
+  <link rel="stylesheet" href="stylesheets/reset.css" type="text/css">
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+	<link rel="stylesheet" href="stylesheets/date_picker_input.css" type="text/css">
+	<script src="jquery-1.4.4.js" type="text/javascript"></script> 
+	<script src="month_calendar.js" type="text/javascript"></script> 
+	<script src="date_picker_input.js" type="text/javascript"></script> 
+	<script type="text/javascript">
+	  $(function(){
+	    $("#calendar").monthCalendar({
+	      selected: function(date) {
+	        console.log('selected ', date);
+	      }
+	    });
+	    
+	    $("#calendar_input").datePickerInput({
+	      dateFormat: "%d. %m. %Y"
+	    });
+	    $("#calendar_input2").datePickerInput({
+	      dateFormat: "%d. %m. %Y"
+	    });
+	    
+	    $('#calendar_input').change(function() {
+	      console.log('calendar_input did change');
+	    });
+	    $('#calendar_input2').change(function() {
+	      console.log('calendar_input2 did change');
+	    });
+	  });
+	</script>
+	<!-- Date: 2010-12-14 -->
+</head>
+<body>
+<div id="calendar"></div>
+<div style="clear:left"></div>
+<input type="text" name="calendar" value="" id="calendar_input">
+<br><br><br><br>
+<input type="text" name="calendar" value="" id="calendar_input2" value="1. 1. 2011">
+</body>
+</html>
